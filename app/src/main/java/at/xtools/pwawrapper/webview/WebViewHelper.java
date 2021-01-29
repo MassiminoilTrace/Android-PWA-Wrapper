@@ -205,10 +205,9 @@ public class WebViewHelper {
     private boolean handleUrlLoad(WebView view, String url) {
         // prevent loading content that isn't ours
         if (!url.startsWith(Constants.WEBAPP_URL)) {
-            // stop loading
-            // stopping only would cause the PWA to freeze, need to reload the app as a workaround
-            view.stopLoading();
-            view.reload();
+            // We want to not load external url here, simply navigate to the last page
+            // which was accepted
+            view.goBack();
 
             // open external URL in Browser/3rd party apps instead
             try {
